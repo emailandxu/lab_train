@@ -25,6 +25,9 @@ def func_relu(input_):
     else:
         return 1
 
+def func_tanh(input_):
+    pass
+
 s = add([3,2,3],[2,4,7])
 print(s)
 print("Sigmoid",func_sigmoid(s))
