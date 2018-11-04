@@ -27,7 +27,7 @@ def func_step(inputs):
 
 #Wang wenjun
 def func_sgn(inputs):
- if a < 0:
+ if inputs < 0:
   return -1
  else:
   return 1
@@ -45,7 +45,7 @@ def func_ramp(inputs):
   return 1
 
 #Zhao peilian
-def function_sigmoid(inputs):
+def func_sigmoid(inputs):
     f=0
     demo=(1+math.exp(-1.0*inputs))
     if(demo==0):
@@ -57,3 +57,14 @@ def function_sigmoid(inputs):
 #Wang wenjun
 def func_Tanh(inputs):
  return (math.exp(inputs)-math.exp(-inputs))/(math.exp(inputs)+math.exp(-inputs))
+
+def func_bias(inputs,b):
+ return inputs + b * 1
+
+def neural_output(weights,outputs):
+ s = add(weights,outputs)
+ a = func_sigmoid(s)
+ outputs = func_bias(a,1)
+ return outputs
+
+print(neural_output([3.1215926,1.234567],[0,1]))
