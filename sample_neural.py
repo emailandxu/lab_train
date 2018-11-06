@@ -2,8 +2,11 @@
 
 import math
 
-input_x = [-1, 1, 1]
-y = 1
+weights = [1.232434,-3.754862,-1.342545]
+
+input_x = [[1, 1, 0],[0,0,1]]
+y = [0,1]
+
 
 #s = w1p1+w2p2+w3p3+ ......
 
@@ -101,4 +104,25 @@ def train_for_1000steps():
  print(weights)
  print(inputs)
 
-train_for_1000steps()
+#calculate single e
+def loss_e(outputs, y):
+  e = y - outputs
+  return e
+
+def train_on_batch():
+ bias = 1
+ e_avg = 0
+ e_sum = 0
+ for i in range(0,len(y)):
+  outputs = neural_output(weights[i], input_x[i])
+  e = loss_e(outputs,y[i])
+  e_sum += e
+ e_avg = e_sum/len(y)
+ weight1,bias1 = update_hp(weights[0], bias)
+ weight2,bias2 = update_hp(weights[1], bias)
+ weight = avg_weight(weight1,weight2)
+ bias = avg_bias(bias1,bias2)
+
+ train_on_batch()
+ 
+  
