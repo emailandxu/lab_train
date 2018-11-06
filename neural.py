@@ -62,25 +62,6 @@ def batch_loss(y,weights, bias, inputs, outputs):
     return weights,bias
 
 
-def batch_loss_no_x(y,weights, bias, inputs, outputs):
-    """update weights and bias of a layer use batch gradient descend
-    @params:
-    inputs: 2-d list
-    outputs: 1-d list
-    y: 1-d list
-    weights: 1-d list
-    bias: float
-    """
-    assert type(y) is list and type(outputs) is list
-    
-    errors = [y[index_record]-output_ for index_record, output_ in enumerate(outputs)]
-    mean_e = sum(errors)/len(errors)
-    bias += mean_e
-
-    return [weight+mean_e for weight in weights],bias
-
-
-
 def run_a_loop():
     weights = [1.232434, -3.754862, -1.342545]
     # atrribute:
@@ -122,26 +103,5 @@ def run_a_loop_use_bath_loss():
     
     print(weights,bias)
     print([add(weights,input_)+bias for input_ in multi_inputs])
-
-
-def run_a_loop_use_bath_loss_no_x():
-    weights = [1.232434, -3.754862, -1.342545]
-    # atrribute:
-    # color 1 red 0 yellow
-    # shape 1 circle 0 rect
-    # smell 1 apple 0 banana
-    # y: 0 apple, 1 banana
-    multi_inputs = [[1,1,0],[0,0,1]]
-    y = [0,1]
-    bias = 1
-    print(weights,bias)
-    # loop times
-    for i in range(1000):
-        # a loop update weights by all records
-        outputs = [neural_output(weights,bias,single_inputs) for single_inputs in multi_inputs]
-        weights,bias = batch_loss_no_x(y,weights,bias,multi_inputs,outputs)
-        print(outputs)
-    
-    print(weights,bias)
 
 run_a_loop_use_bath_loss()
